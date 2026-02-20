@@ -1,4 +1,29 @@
-import { useState } from 'react'
+// Herbal Hut - Add Footer Credit
+// Run from project root: node setup4.cjs
+
+const fs = require('fs');
+
+console.log('🌿 Adding footer credit to Herbal Hut...\n');
+
+function write(filePath, content) {
+  fs.writeFileSync(filePath, content, 'utf8');
+  console.log(`  ✅ Updated: ${filePath}`);
+}
+
+// ─── src/components/Footer.jsx ────────────────────────────────────────────────
+write('src/components/Footer.jsx', `export default function Footer() {
+  return (
+    <div className="fixed bottom-0 right-0 px-3 py-2 z-50">
+      <p className="text-xs text-amber-400 font-semibold opacity-80">
+        by Annie Sofia 🌿
+      </p>
+    </div>
+  );
+}
+`);
+
+// ─── src/App.jsx ──────────────────────────────────────────────────────────────
+write('src/App.jsx', `import { useState } from 'react'
 import Header from './components/Header'
 import IngredientGrid from './components/IngredientGrid'
 import CategoryChips from './components/CategoryChips'
@@ -56,7 +81,7 @@ export default function App() {
           disabled={loading}
           className="w-full bg-gradient-to-r from-orange-600 to-amber-500 text-white font-bold py-4 rounded-2xl shadow-lg active:scale-95 transition-all disabled:opacity-60"
         >
-          {loading ? '🌿 Finding Remedies...' : `✨ Find Remedies ${selectedIngredients.length > 0 ? `(${selectedIngredients.length} selected)` : ''}`}
+          {loading ? '🌿 Finding Remedies...' : \`✨ Find Remedies \${selectedIngredients.length > 0 ? \`(\${selectedIngredients.length} selected)\` : ''}\`}
         </button>
       </div>
 
@@ -102,3 +127,11 @@ export default function App() {
     </div>
   )
 }
+`);
+
+console.log('\n✅ Footer credit added!\n');
+console.log('Next steps:');
+console.log('  1. Run: npm run build');
+console.log('  2. Then: git add .');
+console.log('  3. Then: git commit -m "Add footer credit"');
+console.log('  4. Then: git push origin master\n');
